@@ -263,17 +263,9 @@ class _SnappyListViewState extends State<SnappyListView> {
               scrollBehavior: widget.scrollBehavior,
               controller: widget.controller,
               itemCount: widget.itemCount,
-              physics: widget.itemSnapping
-                  ? widget.overscrollPhysics?.applyTo(const PageScrollPhysics()
-                          .applyTo(widget.physics ??
-                              widget.scrollBehavior
-                                  ?.getScrollPhysics(context))) ??
-                      const PageScrollPhysics().applyTo(widget.physics ??
-                          widget.scrollBehavior?.getScrollPhysics(context))
-                  : widget.physics ??
-                      widget.scrollBehavior?.getScrollPhysics(context),
+              physics: widget.physics,
               scrollDirection: widget.scrollDirection,
-              pageSnapping: false,
+              pageSnapping: widget.itemSnapping,
               reverse: widget.reverse,
               itemBuilder: (context, index) {
                 return Container();
