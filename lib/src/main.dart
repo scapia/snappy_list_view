@@ -177,6 +177,8 @@ class _SnappyListViewState extends State<SnappyListView> {
 
   bool initialBuild = true;
 
+  double? firstItemSize;
+
   @override
   void initState() {
     super.initState();
@@ -395,9 +397,13 @@ class _SnappyListViewState extends State<SnappyListView> {
       final itemSize = internalSizes.elementAt(internalItemIndex).size;
       assert(itemSize <= maxScrollDirectionSize,
           "The size of each item is limited to the maximum size of the scroll area.");
+      if (index == 0 && firstItemSize == null) {
+        firstItemSize = itemSize;
+      }
       return itemSize;
     } else {
-      return 0;
+      // Return cached size of the first item if `index == 0` and size is not present in the `internalSizes`
+      return index == 0 ? firstItemSize ?? 0 : 0;
     }
   }
 
